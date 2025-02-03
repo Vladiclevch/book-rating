@@ -5,7 +5,7 @@
   const { values, errors, defineField, handleSubmit } = useForm({
     validationSchema: yup.object({
       name: yup.string().required('Name is required'),
-      email: yup.string().email('Incorrect email').required('Email is required'),
+      email: yup.string().email('Incorrect email address').required('Email is required'),
       password: yup.string().min(6, 'Password must be at least 6 characters long').required('Password is required'),
       confirmPassword: yup.string().oneOf([yup.ref('password')], 'Passwords must match').required('Confirm password is required'),
     }),
@@ -23,6 +23,7 @@
 
 <template>
   <form @submit="onSubmit" novalidate>
+
     <div>
       <label class="">User name</label>
       <input v-model="name" v-bind="nameAttrs" type="text" class="">
@@ -47,8 +48,9 @@
       <p v-if="errors.confirmPassword" class="">{{ errors.confirmPassword }}</p>
     </div>
 
-    <button type="submit">
+    <button type="submit" class="">
       Sign up
     </button>
+
   </form>
 </template>
