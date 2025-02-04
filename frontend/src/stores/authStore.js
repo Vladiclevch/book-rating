@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import { loginUser, fetchCurrentUser, logoutUser } from '../api/auth'
+import { defineStore } from 'pinia';
+import { ref, computed } from 'vue';
+import { loginUser, fetchCurrentUser, logoutUser, registerUser } from '../api/auth';
 
 export const useAuthStore = defineStore('authStore', () => {
   const user = ref(null);
@@ -10,23 +10,27 @@ export const useAuthStore = defineStore('authStore', () => {
 
   const isAuthenticated = computed(() => !!token.value);
 
-  const login = async (credentials) => {
+  const authenticate = async (apiMethod, userData, errorMessage) => {
     isLoading.value = true;
     error.value = null;
 
     try {
-      const response = await loginUser(credentials);
+      const response = await apiMethod(userData);
       token.value = response.data.token;
       user.value = response.data.user;
       localStorage.setItem('token', token.value);
 
     } catch (err) {
-      error.value = err.response?.data?.message || 'Login failed';
+      error.value = err.response?.data?.message || errorMessage;
 
     } finally {
       isLoading.value = false;
     }
+
   };
+
+  const login = (userData) => authenticate(loginUser, userData, 'Login failed');
+  const register = (userData) => authenticate(registerUser, userData, 'Register failed');
 
   const fetchUser = async () => {
     if(!token.value) return;
@@ -45,7 +49,7 @@ export const useAuthStore = defineStore('authStore', () => {
 
     try {
       await logoutUser();
-      
+
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -61,8 +65,9 @@ export const useAuthStore = defineStore('authStore', () => {
     isAuthenticated,
     isLoading,
     error,
+    register,
     login,
     fetchUser,
-    logout
+    logout,
   }
 });
