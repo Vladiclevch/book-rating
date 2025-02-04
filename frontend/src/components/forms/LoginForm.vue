@@ -1,6 +1,11 @@
 <script setup>
   import { useForm } from 'vee-validate';
+  import { useAuthStore } from '../../stores/authStore'
+  import { useRouter } from 'vue-router'
   import * as yup from 'yup';
+
+  const authStore = useAuthStore();
+  const router = useRouter();
 
   const { values, errors, defineField, handleSubmit } = useForm({
     validationSchema: yup.object({
@@ -12,8 +17,12 @@
   const [email, emailAttrs] = defineField('email');
   const [password, passwordAttrs] = defineField('password');
 
-  const onSubmit = handleSubmit(values => {
-    console.log(values);
+  const onSubmit = handleSubmit(async (values) => {
+    await authStore.login(values);
+
+    if(authStore.isAuthenticated) {
+      router.push('/home');
+    }
   });
 </script>
 
