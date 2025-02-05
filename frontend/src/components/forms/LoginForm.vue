@@ -1,7 +1,7 @@
 <script setup>
   import { useForm } from 'vee-validate';
-  import { useAuthStore } from '../../stores/authStore'
-  import { useRouter } from 'vue-router'
+  import { useAuthStore } from '../../stores/authStore';
+  import { useRouter } from 'vue-router';
   import * as yup from 'yup';
 
   const authStore = useAuthStore();
@@ -44,6 +44,8 @@
     <button type="submit" class="">
       Log in
     </button>
+
+    <p v-if="authStore.error" class="">{{ authStore.error }}</p>
 
   </form>
 </template>
