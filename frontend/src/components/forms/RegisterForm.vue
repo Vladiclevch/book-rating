@@ -12,14 +12,14 @@
       name: yup.string().required('Name is required'),
       email: yup.string().email('Incorrect email address').required('Email is required'),
       password: yup.string().min(6, 'Password must be at least 6 characters long').required('Password is required'),
-      confirmPassword: yup.string().oneOf([yup.ref('password')], 'Passwords must match').required('Confirm password is required'),
+      password_confirmation: yup.string().oneOf([yup.ref('password')], 'Passwords must match').required('Confirm password is required'),
     }),
   });
 
   const [name, nameAttrs] = defineField('name');
   const [email, emailAttrs] = defineField('email');
   const [password, passwordAttrs] = defineField('password');
-  const [confirmPassword, confirmPasswordAttrs] = defineField('confirmPassword');
+  const [password_confirmation, passwordConfirmationAttrs] = defineField('password_confirmation');
 
   const onSubmit = handleSubmit(async (values) => {
     await authStore.register(values);
@@ -53,8 +53,8 @@
 
     <div>
       <label class="">Confirm password</label>
-      <input v-model="confirmPassword" v-bind="confirmPasswordAttrs" type="password" class="">
-      <p v-if="errors.confirmPassword" class="">{{ errors.confirmPassword }}</p>
+      <input v-model="password_confirmation" v-bind="passwordConfirmationAttrs" type="password" class="">
+      <p v-if="errors.password_confirmation" class="">{{ errors.password_confirmation }}</p>
     </div>
 
     <button type="submit" class="">
