@@ -3,5 +3,8 @@
 </script>
 
 <template>
-  <p>404</p>
+  <div>
+    <p>404</p>
+    <p>Sorry, not found</p>
+  </div>
 </template>

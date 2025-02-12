@@ -5,6 +5,7 @@ import LoginView from '../views/LoginView.vue';
 import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/AboutView.vue';
 import NotFountView from '../views/NotFountView.vue';
+import SettingsView from '../views/SettingsView.vue'
 
 const routes = [
   { path: '/', redirect: '/home' },
@@ -12,6 +13,7 @@ const routes = [
   { path: '/register', component: RegisterView },
   { path: '/login', component: LoginView },
   { path: '/about', component: AboutView },
+  { path: '/settings', component: SettingsView },
   { path: '/:pathMatch(.*)*', component: NotFountView },
 ];
 
