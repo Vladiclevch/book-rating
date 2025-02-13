@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="bg-gray-600 flex justify-center items-center w-screen h-screen">
     <LoginForm />
   </div>
 </template>

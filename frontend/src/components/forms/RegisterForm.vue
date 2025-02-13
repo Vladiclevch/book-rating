@@ -31,37 +31,61 @@
 </script>
 
 <template>
-  <form @submit="onSubmit" novalidate>
+  <form @submit="onSubmit" novalidate class="bg-gray-800 rounded-lg shadow-lg w-85 px-8 pt-6 pb-8 mb-14">
 
-    <div>
-      <label class="">User name</label>
-      <input v-model="name" v-bind="nameAttrs" type="text" class="">
-      <p v-if="errors.name" class="">{{ errors.name }}</p>
+    <div class="mb-4">
+      <label for="name" class="block text-white font-bold mb-2">User name</label>
+      <input
+      id="name"
+      v-model="name"
+      v-bind="nameAttrs"
+      type="name"
+      class="bg-gray-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
+      <p v-if="errors.name" class="text-red-600 font-bold mt-2">{{ errors.name }}</p>
     </div>
 
-    <div>
-      <label class="">Email</label>
-      <input v-model="email" v-bind="emailAttrs" type="email" class="">
-      <p v-if="errors.email" class="">{{ errors.email }}</p>
+    <div class="mb-4">
+      <label for="email" class="block text-white font-bold mb-2">Email</label>
+      <input
+      id="email"
+      v-model="email"
+      v-bind="emailAttrs"
+      type="email"
+      class="bg-gray-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
+      <p v-if="errors.email" class="text-red-600 font-bold mt-2">{{ errors.email }}</p>
     </div>
 
-    <div>
-      <label class="">Password</label>
-      <input v-model="password" v-bind="passwordAttrs" type="password" class="">
-      <p v-if="errors.password" class="">{{ errors.password }}</p>
+    <div class="mb-4">
+      <label for="password" class="block text-white font-bold mb-2">Password</label>
+      <input
+      id="password"
+      v-model="password"
+      v-bind="passwordAttrs"
+      type="password"
+      class="bg-gray-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
+      <p v-if="errors.password" class="text-red-600 font-bold mt-2">{{ errors.password }}</p>
     </div>
 
-    <div>
-      <label class="">Confirm password</label>
-      <input v-model="password_confirmation" v-bind="passwordConfirmationAttrs" type="password" class="">
-      <p v-if="errors.password_confirmation" class="">{{ errors.password_confirmation }}</p>
+    <div class="mb-4">
+      <label for="password_confirmation" class="block text-white font-bold mb-2">Confirm password</label>
+      <input
+      id="password_confirmation"
+      v-model="password_confirmation"
+      v-bind="passwordConfirmationAttrs"
+      type="password"
+      class="bg-gray-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
+      <p v-if="errors.password_confirmation" class="text-red-600 font-bold mt-2">{{ errors.password_confirmation }}</p>
     </div>
 
-    <button type="submit" class="">
+    <a @click="router.push('/login')" class="text-sm text-blue-400 hover:text-blue-600 mb-3 block cursor-pointer">Already have an account?</a>
+
+    <button type="submit" class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 rounded cursor-pointer w-full">
       Sign up
     </button>
 
-    <p v-if="authStore.error" class="">{{ authStore.error }}</p>
+    <div v-if="authStore.error" class="mt-4 text-red-600 font-bold">
+      <p>{{ authStore.error }}</p>
+    </div>
     
   </form>
 </template>
