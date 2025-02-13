@@ -17,18 +17,16 @@
 <template>
 
   <div v-if="authStore.isAuthenticated" class="flex h-screen">
-    <SideBar/>
+    <SideBar />
     <div class="flex-1 flex flex-col">
       <NavBar />
-
-      <main class="bg-gray-400 flex-1 p-4 ">
-        TO DO list
+      <main class="bg-neutral-800 flex-1 p-4 ">
+        <router-view />
       </main>
-
     </div>
   </div>
 
-  <div v-else class="bg-gray-600 flex justify-center items-center w-screen h-screen">
+  <div v-else class="bg-neutral-600 flex justify-center items-center w-screen h-screen">
     <WelcomeForm />
   </div>
 </template>

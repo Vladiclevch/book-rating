@@ -27,7 +27,7 @@
 </script>
 
 <template>
-  <form @submit="onSubmit" novalidate class="bg-gray-800 rounded-lg shadow-lg w-85 px-8 pt-6 pb-8 mb-24">
+  <form @submit="onSubmit" novalidate class="bg-neutral-800 rounded-lg shadow-lg w-85 px-8 pt-6 pb-8 mb-24">
 
     <div class="mb-4">
       <label for="email" class="block text-white font-bold mb-2">Email</label>
@@ -36,7 +36,7 @@
       v-model="email"
       v-bind="emailAttrs"
       type="email"
-      class="bg-gray-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
+      class="bg-neutral-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
       <p v-if="errors.email" class="text-red-600 font-bold mt-2">{{ errors.email }}</p>
     </div>
 
@@ -47,7 +47,7 @@
       v-model="password"
       v-bind="passwordAttrs" 
       type="password"
-      class="bg-gray-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
+      class="bg-neutral-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
       <p v-if="errors.password" class="text-red-600 font-bold mt-2">{{ errors.password }}</p>
     </div>
 

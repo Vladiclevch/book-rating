@@ -31,7 +31,7 @@
 </script>
 
 <template>
-  <form @submit="onSubmit" novalidate class="bg-gray-800 rounded-lg shadow-lg w-85 px-8 pt-6 pb-8 mb-14">
+  <form @submit="onSubmit" novalidate class="bg-neutral-800 rounded-lg shadow-lg w-85 px-8 pt-6 pb-8 mb-14">
 
     <div class="mb-4">
       <label for="name" class="block text-white font-bold mb-2">User name</label>
@@ -40,7 +40,7 @@
       v-model="name"
       v-bind="nameAttrs"
       type="name"
-      class="bg-gray-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
+      class="bg-neutral-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
       <p v-if="errors.name" class="text-red-600 font-bold mt-2">{{ errors.name }}</p>
     </div>
 
@@ -51,7 +51,7 @@
       v-model="email"
       v-bind="emailAttrs"
       type="email"
-      class="bg-gray-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
+      class="bg-neutral-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
       <p v-if="errors.email" class="text-red-600 font-bold mt-2">{{ errors.email }}</p>
     </div>
 
@@ -62,7 +62,7 @@
       v-model="password"
       v-bind="passwordAttrs"
       type="password"
-      class="bg-gray-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
+      class="bg-neutral-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
       <p v-if="errors.password" class="text-red-600 font-bold mt-2">{{ errors.password }}</p>
     </div>
 
@@ -73,7 +73,7 @@
       v-model="password_confirmation"
       v-bind="passwordConfirmationAttrs"
       type="password"
-      class="bg-gray-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
+      class="bg-neutral-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
       <p v-if="errors.password_confirmation" class="text-red-600 font-bold mt-2">{{ errors.password_confirmation }}</p>
     </div>
 
