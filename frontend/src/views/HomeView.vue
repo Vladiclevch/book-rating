@@ -16,7 +16,7 @@
 
 <template>
 
-  <div v-if="authStore.isAuthenticated" class="flex h-screen">
+  <div v-if="!authStore.isAuthenticated" class="flex h-screen">
     <SideBar />
     <div class="flex-1 flex flex-col">
       <NavBar />

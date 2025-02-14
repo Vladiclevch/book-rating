@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <div class="bg-gray-600 flex justify-center items-center w-screen h-screen">
+  <div class="bg-neutral-600 flex justify-center items-center w-screen h-screen">
 
     <div class="text-center mb-24">
       <p class="text-6xl font-bold text-gray-900">404</p>

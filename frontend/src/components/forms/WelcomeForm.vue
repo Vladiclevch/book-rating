@@ -6,7 +6,7 @@
 
 <template>
   <div class="bg-neutral-800 text-white text-center p-6 rounded-lg shadow-lg w-85 max-w-md mb-24">
-    <h2 class="text-2xl mb-6">Welcome! Please Log in</h2>
+    <h2 class="text-2xl mb-6">Welcome! Please Log In</h2>
 
     <div class="flex flex-col gap-4">
       <button 
