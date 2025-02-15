@@ -15,3 +15,7 @@ export const fetchCurrentUser = async () => {
 export const logoutUser = async () => {
   return await instance.post('/logout');
 };
+
+export const createBook = async (userData) => {
+  return await instance.post('/create', userData);
+};

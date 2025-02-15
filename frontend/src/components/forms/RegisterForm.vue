@@ -39,7 +39,7 @@
       id="name"
       v-model="name"
       v-bind="nameAttrs"
-      type="name"
+      type="text"
       class="bg-neutral-700 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3 w-full">
       <p v-if="errors.name" class="text-red-600 font-bold mt-2">{{ errors.name }}</p>
     </div>
