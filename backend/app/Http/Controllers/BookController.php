@@ -33,14 +33,19 @@ class BookController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'img' => ['nullable', 'url'],
+            'img' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
             'grade' => ['string', 'in:Read later,Excellent,Good,Average,Bad,Disgusting'],
         ]);
+
+        $imgPath = null;
+        if($request->hasFile('img')) {
+            $imgPath = $request->file('img')->store('users/' . Auth::id(), 'local');
+        }
 
         $book = Book::create([
             'title' => $request->title,
             'description' => $request->description,
-            'img' => $request->img,
+            'img' => $imgPath,
             'grade' => $request->grade ?? 'Read later',
             'user_id' => Auth::id(),
         ]);

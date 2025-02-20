@@ -15,13 +15,13 @@ const routes = [
       {
         path: 'about',
         component: AboutSection,
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
       },
 
       {
         path: 'create',
         component: CreateBookSection,
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
       }
     ]
   },

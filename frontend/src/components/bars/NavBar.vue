@@ -1,13 +1,20 @@
 <script setup>
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
+  import { useAuthStore } from '../../stores/authStore';
   import defaultProfileImage from '@/assets/icons/profile-default.svg';
 
   const dropdownOpen = ref(false);
   const router = useRouter();
+  const authStore = useAuthStore();
 
   const toggleDropdown = () => {
     dropdownOpen.value = !dropdownOpen.value;
+  }
+
+  const logout = () => {
+    authStore.logout();
+    router.push('/home');
   }
 </script>
 
@@ -38,7 +45,7 @@
               Settings
             </li>
             
-            <li @click="router.push('/logout')" class="px-4 py-2 hover:bg-gray-800 cursor-pointer">
+            <li @click="logout" class="px-4 py-2 hover:bg-gray-800 cursor-pointer">
               Logout
             </li>
           </ul>

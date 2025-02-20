@@ -14,7 +14,7 @@
 
   const submitForm = async() => {
     const formData = new FormData();
-    formData.append('picture', picture.value);
+    formData.append('img', picture.value);
     formData.append('title', title.value);
     formData.append('description', description.value);
     formData.append('grade', grade.value);
@@ -29,44 +29,46 @@
 </script>
 
 <template>
-  <form action="">
+  <form @submit.prevent="submitForm" class="flex flex-col items-start">
 
-    <div>
-      <label for="picture">Picture</label>
+    <div class="mb-4">
+      <label for="picture" class="block text-white font-bold mb-2">Picture</label>
       <input
       id="picture"
-      type="file">
+      type="file"
+      @change="handleFileUpload"
+      class="bg-neutral-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-2">
     </div>
 
-    <div>
-      <label for="title">Title</label>
+    <div class="mb-4">
+      <label for="title" class="block text-white font-bold mb-2">Title</label>
       <input
       id="title"
-      type="text">
+      type="text"
+      v-model="title"
+      class="bg-neutral-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-2">
     </div>
 
-    <div>
-      <label for="description">Description</label>
+    <div class="mb-4">
+      <label for="description" class="block text-white font-bold mb-2">Description</label>
       <input
       id="description"
-      type="text">
+      type="text"
+      v-model="description"
+      class="bg-neutral-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-2">
     </div>
 
-    <div>
-      <label for="grade">Grade</label>
-      <select id="grade">
+    <div class="mb-4">
+      <label for="grade" class="block text-white font-bold mb-2">Grade</label>
+      <select id="grade" v-model="grade" class="bg-neutral-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-2">
         <option value="" disabled>Choose a grade</option>
-        <option value="">Read later</option>
-        <option value="">Excellent</option>
-        <option value="">Good</option>
-        <option value="">Average</option>
-        <option value="">Bad</option>
-        <option value="">Disgusting</option>
+        <option v-for="grade in grades" :key="grade" :value="grade">{{ grade }}</option>
       </select>
     </div>
 
-    <button type="submit">
-      Save
+    <button type="submit" class="bg-blue-400 hover:bg-blue-500 text-white py-1 rounded cursor-pointer w-12 text-center">
+      SAVE
     </button>
+
   </form>
 </template>
