@@ -10,3 +10,12 @@ export const createBook = async (formData) => {
     throw error.response ? error.response.data : error.message;
   }
 };
+
+export const getBooks = async () => {
+  try {
+    const response = await instance.get(`/books`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : error.message;
+  }
+};

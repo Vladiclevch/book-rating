@@ -39,7 +39,7 @@ class BookController extends Controller
 
         $imgPath = null;
         if($request->hasFile('img')) {
-            $imgPath = $request->file('img')->store('users/' . Auth::id(), 'local');
+            $imgPath = $request->file('img')->store('users/' . Auth::id(), 'public');
         }
 
         $book = Book::create([
@@ -62,6 +62,10 @@ class BookController extends Controller
             abort(403, 'Unauthorized');
         }
 
+        if ($book->img) {
+            $book->img = asset('storage/' . $book->img);
+        }
+        
         return response()->json($book);
     }
 
