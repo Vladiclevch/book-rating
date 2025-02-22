@@ -14,7 +14,7 @@
 
   const logout = () => {
     authStore.logout();
-    router.push('/home');
+    router.push('/welcome');
   }
 </script>
 
@@ -26,11 +26,8 @@
       <router-link
       to="/home/create"
       class="bg-blue-400 hover:bg-blue-500 text-white py-2 rounded cursor-pointer w-24 text-center">
-      ADD BOOK</router-link>
-
-      <div>
-        TO DO search
-      </div>
+      ADD BOOK
+      </router-link>
 
       <div class="relative">
         <img 

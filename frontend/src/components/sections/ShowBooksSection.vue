@@ -16,18 +16,22 @@
       }
     }
   });
+
+  const removeBook = (bookId) => {
+    books.value = books.value.filter(book => book.id !== bookId);
+  };
 </script>
 
 <template>
   <div>
-    <h2 class="text-white">My Books</h2>
+    <h2 class="text-white mb-2 text-xl">My Books</h2>
 
     <div v-if="books.length">
       <div v-for="book in books" :key="book.id" class="text-white">
-        <BookForm :book="book" />
+        <BookForm :book="book" @bookDeleted="removeBook" />
       </div>
     </div>
 
-    <p v-else class="">No books yet</p>
+    <p v-else class="text-white">No books yet</p>
   </div>
 </template>

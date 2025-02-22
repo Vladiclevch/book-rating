@@ -30,6 +30,10 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        if (!$request->hasFile('img')) {
+            $request->request->remove('img');
+        }
+        
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
@@ -38,9 +42,10 @@ class BookController extends Controller
         ]);
 
         $imgPath = null;
+        
         if($request->hasFile('img')) {
             $imgPath = $request->file('img')->store('users/' . Auth::id(), 'public');
-        }
+        } 
 
         $book = Book::create([
             'title' => $request->title,
@@ -103,7 +108,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        if($book->user_id !== auth()->Auth::id()) {
+        if($book->user_id !== Auth::id()) {
             abort(403, 'Unauthorized');
         }
 

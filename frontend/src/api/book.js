@@ -13,7 +13,16 @@ export const createBook = async (formData) => {
 
 export const getBooks = async () => {
   try {
-    const response = await instance.get(`/books`);
+    const response = await instance.get('/books');
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : error.message;
+  }
+};
+
+export const deleteBook = async (id) => {
+  try {
+    const response = await instance.delete(`/books/${id}`);
     return response.data;
   } catch (error) {
     throw error.response ? error.response.data : error.message;
