@@ -1,45 +1,61 @@
 <script setup>
-  import { ref } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
-  import { createBook } from '../../api/book'
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { getBook, editBook } from '../../api/book';
 
-  const router = useRouter();
-  
-  const picture = ref(null);
-  const title = ref('');
-  const description = ref('');
-  const grade = ref('');
-  const grades = ['Read later', 'Excellent', 'Good', 'Average', 'Bad', 'Disgusting'];
-  const fileUploaded = ref(false);
+const route = useRoute();
+const router = useRouter();
+const book = ref({
+  title: '',
+  description: '',
+  grade: '',
+});
+const picture = ref(null);
 
-  const handleFileUpload = (event) => {
+const grades = ['Read later', 'Excellent', 'Good', 'Average', 'Bad', 'Disgusting'];
+const fileUploaded = ref(false);
+
+onMounted(async () => {
+  try {
+    const response = await getBook(route.params.id);
+    book.value = response;
+  } catch (error) {
+    console.error('Error loading book:', error);
+  }
+});
+
+const handleFileUpload = (event) => {
     picture.value = event.target.files[0];
 
     if (picture.value) {
       fileUploaded.value = true;
     }
-  };
+};
 
-  const submitForm = async() => {
-    const formData = new FormData();
+const submitForm = async () => {
+  const formData = new FormData();
+
+  if (picture.value) {
     formData.append('img', picture.value);
-    formData.append('title', title.value);
-    formData.append('description', description.value);
-    formData.append('grade', grade.value);
-
-    try {
-      const response = await createBook(formData);
-      alert('Book added successfully!');
-      router.push('/home/books');
-    } catch (error) {
-      alert('Error submitting form. Please try again.');
-    }
   }
+  formData.append('title', book.value.title);
+  formData.append('description', book.value.description);
+  formData.append('grade', book.value.grade);
+
+  try {
+    const response = await editBook(route.params.id, formData);
+    alert('Book updated successfully!');
+    router.push('/home/books');
+  } catch (error) {
+    console.error(error);
+    alert('Error updating book. Please try again.');
+  }
+};
 </script>
 
 <template>
   <div class="max-w-xl mx-auto mt-10">
-    <h2 class="text-white text-xl mb-4">Create Book</h2>
+    <h2 class="text-white text-xl mb-4">Edit Book</h2>
 
     <form @submit.prevent="submitForm" class="flex flex-col">
       <div class="mb-4 w-full">
@@ -47,7 +63,7 @@
         <input 
           id="title" 
           type="text" 
-          v-model="title"
+          v-model="book.title"
           class="w-full bg-neutral-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-2"
         />
       </div>
@@ -56,7 +72,7 @@
         <label for="description" class="block text-white font-bold mb-2">Description</label>
         <textarea 
           id="description" 
-          v-model="description"
+          v-model="book.description"
           class="w-full bg-neutral-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-2"
         ></textarea>
       </div>
@@ -65,7 +81,7 @@
         <label for="grade" class="block text-white font-bold mb-2">Grade</label>
         <select 
           id="grade" 
-          v-model="grade"
+          v-model="book.grade"
           class="bg-neutral-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 p-3"
         >
           <option value="" disabled>Choose a grade</option>
@@ -95,7 +111,7 @@
         type="submit" 
         class="mt-4 bg-blue-400 hover:bg-blue-500 text-white py-2 rounded cursor-pointer w-24 text-center"
       >
-        SAVE
+        UPDATE
       </button>
     </form>
   </div>

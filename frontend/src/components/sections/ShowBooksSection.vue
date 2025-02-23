@@ -20,6 +20,13 @@
   const removeBook = (bookId) => {
     books.value = books.value.filter(book => book.id !== bookId);
   };
+
+  const updateBookInList = (updatedBook) => {
+  const index = books.value.findIndex(book => book.id === updatedBook.id);
+  if (index !== -1) {
+    books.value[index] = { ...books.value[index], ...updatedBook };
+  }
+};
 </script>
 
 <template>
@@ -28,7 +35,7 @@
 
     <div v-if="books.length">
       <div v-for="book in books" :key="book.id" class="text-white">
-        <BookForm :book="book" @bookDeleted="removeBook" />
+        <BookForm :book="book" @bookDeleted="removeBook" @bookUpdated="updateBookInList" />
       </div>
     </div>
 

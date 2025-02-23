@@ -4,10 +4,8 @@
 </script>
 
 <template>
-
-  <div class="flex h-screen">
-
-    <SideBar />
+  <div class="flex h-full">
+    <SideBar class="min-h-screen" />
 
     <div class="flex-1 flex flex-col">
       <NavBar />
@@ -15,6 +13,5 @@
         <router-view />
       </main>
     </div>
-
   </div>
 </template>

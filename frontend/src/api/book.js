@@ -20,6 +20,24 @@ export const getBooks = async () => {
   }
 };
 
+export const getBook = async (id) => {
+  try {
+    const response = await instance.get(`/books/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : error.message;
+  }
+};
+
+export const editBook = async (id, updatedData) => {
+  try {
+    const response = await instance.put(`/books/${id}`, updatedData);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : error.message;
+  }
+};
+
 export const deleteBook = async (id) => {
   try {
     const response = await instance.delete(`/books/${id}`);

@@ -1,10 +1,5 @@
-<script setup>
-
-</script>
-
 <template>
-  <aside class="bg-neutral-700 w-64 p-4 flex flex-col justify-between h-full">
-
+  <aside class="bg-neutral-700 w-64 p-4 flex flex-col justify-between min-h-full">
     <div class="mb-6 self-center">
       <router-link to="/home">
         <h1 class="text-xl text-white font-black">📚Book Rating📚</h1>

@@ -8,6 +8,7 @@ import NotFountView from '../views/NotFountView.vue';
 import SettingsView from '../views/SettingsView.vue';
 import AboutSection from '../components/sections/AboutSection.vue';
 import CreateBookSection from '../components/sections/CreateBookSection.vue';
+import EditBookSection from '../components/sections/EditBookSection.vue';
 import ShowBookSection from '../components/sections/ShowBooksSection.vue';
 
 const routes = [
@@ -36,6 +37,13 @@ const routes = [
         component: ShowBookSection,
         meta: { requiresAuth: true }
       },
+
+      {
+        path: 'edit/:id',
+        name: 'EditBook',
+        component: EditBookSection,
+        meta: { requiresAuth: true }
+      }
     ]
   },
   { path: '/welcome', component: WelcomeView },

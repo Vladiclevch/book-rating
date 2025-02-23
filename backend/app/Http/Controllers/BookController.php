@@ -45,7 +45,7 @@ class BookController extends Controller
         
         if($request->hasFile('img')) {
             $imgPath = $request->file('img')->store('users/' . Auth::id(), 'public');
-        } 
+        }
 
         $book = Book::create([
             'title' => $request->title,
@@ -87,20 +87,35 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
-            'img' => ['nullable'],
-            'grade' => ['string', 'in:Read later,Excellent,Good,Average,Bad,Disgusting'],
-        ]);
+    $request->validate([
+        'title' => ['required', 'string', 'max:255'],
+        'description' => ['nullable', 'string'],
+        'img' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'], // Додано мimes і розмір
+        'grade' => ['string', 'in:Read later,Excellent,Good,Average,Bad,Disgusting'],
+    ]);
 
-        if($book->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized');
+    if($book->user_id !== Auth::id()) {
+        abort(403, 'Unauthorized');
+    }
+
+    $imgPath = $book->img;
+
+    if ($request->hasFile('img')) {
+        if ($book->img) {
+            \Storage::disk('public')->delete($book->img);
         }
 
-        $book->update($request->only(['title', 'description', 'img', 'grade']));
+        $imgPath = $request->file('img')->store('users/' . Auth::id(), 'public');
+    }
 
-        return response()->json(['message' => 'Book updated!', 'book' => $book]);
+    $book->update([
+        'title' => $request->title,
+        'description' => $request->description,
+        'img' => $imgPath,
+        'grade' => $request->grade ?? 'Read later',
+    ]);
+
+    return response()->json(['message' => 'Book updated!', 'book' => $book]);
     }
 
     /**
