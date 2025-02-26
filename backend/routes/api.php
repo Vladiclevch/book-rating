@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\BookController;
+use App\Http\Controllers\Books\BookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
