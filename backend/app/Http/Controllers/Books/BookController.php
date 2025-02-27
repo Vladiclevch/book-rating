@@ -7,7 +7,6 @@ use App\Models\Book;
 use App\Repositories\BookRepository;
 use App\Services\BookService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {

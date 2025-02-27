@@ -17,6 +17,13 @@ class BookService
         $this->bookRepository = $bookRepository;
     }
 
+    public function autorizeUser(Book $book): void
+    {
+        if($book->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized');
+        }
+    }
+
     public function validateRequest(Request $request): array
     {
         return $request->validate([
@@ -38,12 +45,5 @@ class BookService
         }
 
         return $request->file('img')->store('users/' . Auth::id(), 'public');
-    }
-
-    public function autorizeUser(Book $book): void
-    {
-        if($book->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized');
-        }
     }
 }
